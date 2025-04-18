@@ -363,12 +363,14 @@ class DataAssessment:
         full_report = "\n".join(report)
         
         # Save to file if path provided
+# Save to file if path provided
         if output_path:
             try:
                 with open(output_path, 'w', encoding='utf-8') as f:
                     f.write(full_report)
                 self.logger.info(f"Report saved to {output_path}")
-                return None
             except Exception as e:
                 self.logger.error(f"Error saving report: {e}")
-                return full_report
+
+        # Always return the report string
+        return full_report

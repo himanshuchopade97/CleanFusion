@@ -1,0 +1,46 @@
+# Data Quality Assessment Report
+
+## Dataset Overview
+- Number of rows: 100
+- Number of columns: 12
+
+## Missing Values
+- Total missing cells: 0 (0.00%)
+- Columns with missing values: 0
+
+### Top 5 Columns with Missing Values
+- Index: 0.0 values (0.00%)
+- Customer Id: 0.0 values (0.00%)
+- First Name: 0.0 values (0.00%)
+- Last Name: 0.0 values (0.00%)
+- Company: 0.0 values (0.00%)
+
+## Duplicate Rows
+- Duplicate rows: 0 (0.00%)
+
+## Data Types
+### Column Data Types
+- Index: int64
+- Customer Id: object
+- First Name: object
+- Last Name: object
+- Company: object
+- City: object
+- Country: object
+- Phone 1: object
+- Phone 2: object
+- Email: object
+- Subscription Date: object
+- Website: object
+
+## Outliers
+
+## Distributions
+
+### Index
+- Distribution type: unknown
+- Mean: 50.500
+- Median: 50.500
+- Standard deviation: 29.011
+- Skewness: 0.000
+- Range: 1.000 to 100.000

@@ -3,85 +3,104 @@ Logger module for consistent logging across the library.
 """
 
 import logging
-import sys
 import os
-import datetime
-from pathlib import Path
+import sys
+from datetime import datetime
 
 class Logger:
     """
-    A simple logger class for consistent logging across the library.
+    A centralized logger for the cleanfusion library.
     
     Features:
     - Console and file logging
     - Configurable log levels
-    - Timestamp formatting
-    - Context-aware logging
+    - Formatted log messages with timestamps
+    - Singleton pattern to ensure consistent logging across modules
     """
     
-    # Class variable to track instances
-    _instances = {}
-    _log_dir = Path(os.getcwd()) / "logs"
+    _instance = None
     
-    def __init__(self, name="cleanfusion", level=logging.INFO, log_to_file=True):
+    def __new__(cls, log_level=logging.INFO, log_file=None):
         """
-        Initialize the logger.
+        Create a singleton logger instance.
         
         Parameters
         ----------
-        name : str, default="cleanfusion"
-            The name of the logger.
+        log_level : int, default=logging.INFO
+            The logging level to use.
+        log_file : str, default=None
+            Path to the log file. If None, logs only to console.
         
-        level : int, default=logging.INFO
-            The logging level.
-        
-        log_to_file : bool, default=True
-            Whether to log to a file.
+        Returns
+        -------
+        Logger
+            The singleton logger instance.
         """
-        # Use existing logger if available for the name
-        if name in self._instances:
-            self.logger = self._instances[name]
-            return
-            
-        # Create new logger
-        self.logger = logging.getLogger(name)
-        self.logger.setLevel(level)
-        
-        # Clear existing handlers to avoid duplicates
-        if self.logger.hasHandlers():
-            self.logger.handlers.clear()
-        
-        # Console handler
-        console_handler = logging.StreamHandler(sys.stdout)
-        console_handler.setLevel(level)
+        if cls._instance is None:
+            cls._instance = super(Logger, cls).__new__(cls)
+            cls._instance._initialize(log_level, log_file)
+        return cls._instance
+    
+    def _initialize(self, log_level, log_file):
+        """Initialize the logger with handlers and formatters."""
+        self.logger = logging.getLogger('cleanfusion')
+        self.logger.setLevel(log_level)
+        self.logger.handlers = []  # Clear any existing handlers
         
         # Create formatter
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        console_handler.setFormatter(formatter)
+        formatter = logging.Formatter(
+            '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S'
+        )
         
-        # Add console handler to logger
+        # Create console handler
+        console_handler = logging.StreamHandler(sys.stdout)
+        console_handler.setFormatter(formatter)
         self.logger.addHandler(console_handler)
         
-        # Add file handler if requested
-        if log_to_file:
-            self._add_file_handler(name, level, formatter)
-        
-        # Store instance
-        self._instances[name] = self.logger
+        # Create file handler if log_file is provided
+        if log_file:
+            # Create directory if it doesn't exist
+            log_dir = os.path.dirname(log_file)
+            if log_dir and not os.path.exists(log_dir):
+                os.makedirs(log_dir)
+                
+            file_handler = logging.FileHandler(log_file)
+            file_handler.setFormatter(formatter)
+            self.logger.addHandler(file_handler)
     
-    def _add_file_handler(self, name, level, formatter):
-        """Add a file handler to the logger."""
-        # Ensure log directory exists
-        if not self._log_dir.exists():
-            self._log_dir.mkdir(parents=True)
+    def set_level(self, level):
+        """
+        Set the logging level.
         
-        # Create log file with timestamp
-        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        log_file = self._log_dir / f"{name}_{timestamp}.log"
+        Parameters
+        ----------
+        level : int
+            The logging level to set.
+        """
+        self.logger.setLevel(level)
+        for handler in self.logger.handlers:
+            handler.setLevel(level)
+    
+    def add_file_handler(self, log_file):
+        """
+        Add a file handler to the logger.
         
-        # Add file handler
-        file_handler = logging.FileHandler(log_file, encoding='utf-8')
-        file_handler.setLevel(level)
+        Parameters
+        ----------
+        log_file : str
+            Path to the log file.
+        """
+        # Create directory if it doesn't exist
+        log_dir = os.path.dirname(log_file)
+        if log_dir and not os.path.exists(log_dir):
+            os.makedirs(log_dir)
+            
+        formatter = logging.Formatter(
+            '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S'
+        )
+        file_handler = logging.FileHandler(log_file)
         file_handler.setFormatter(formatter)
         self.logger.addHandler(file_handler)
     
@@ -108,17 +127,3 @@ class Logger:
     def exception(self, message):
         """Log an exception message with traceback."""
         self.logger.exception(message)
-    
-    @classmethod
-    def set_log_directory(cls, directory):
-        """
-        Set the directory for log files.
-        
-        Parameters
-        ----------
-        directory : str
-            The directory path for log files.
-        """
-        cls._log_dir = Path(directory)
-        if not cls._log_dir.exists():
-            cls._log_dir.mkdir(parents=True)
