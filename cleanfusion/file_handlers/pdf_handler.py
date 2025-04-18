@@ -1,10 +1,11 @@
 """
 PDF file handler module for reading and extracting text from PDF files.
 """
-
+import PyPDF2
 import os
 import re
 from cleanfusion.utils.logger import Logger
+import pdfplumber
 
 class PDFHandler:
     """
@@ -33,7 +34,7 @@ class PDFHandler:
             self.logger.info(f"Reading PDF file: {file_path}")
             
             try:
-                import PyPDF2
+                
                 # Extract text with PyPDF2
                 with open(file_path, 'rb') as file:
                     reader = PyPDF2.PdfReader(file)
@@ -45,7 +46,7 @@ class PDFHandler:
             except ImportError:
                 self.logger.warning("PyPDF2 not installed. Attempting to use pdfplumber...")
                 try:
-                    import pdfplumber
+                    
                     with pdfplumber.open(file_path) as pdf:
                         text = ''
                         for page in pdf.pages:
