@@ -6,12 +6,12 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="cleanfusion",
     version="0.1.0",
-    author="Hriday Thaker", 
-    author_email="hriday.thaker@gmail.com",  # Replace with your email
+    author="Hriday Thaker, Himanshu Chopade", 
+    author_email="hriday.thaker@gmail.com, himanshuchopade97@gmail.com",  
     description="A comprehensive data cleaning and preprocessing library for structured and unstructured data",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/thakerhriday/cleanfusion",  # Replace with your GitHub URL
+    url="https://github.com/himanshuchopade97/CleanFusion",  # Replace with your GitHub URL
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
