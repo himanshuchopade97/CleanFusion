@@ -11,6 +11,7 @@ from pathlib import Path
 from cleanfusion.core.data_preprocessor import DataPreprocessor
 from cleanfusion.core.data_assessment import DataAssessment
 from cleanfusion.core.decision_engine import DecisionEngine
+from cleanfusion.file_handlers.csv_handler import CSVHandler
 from cleanfusion.utils.logger import Logger
 from cleanfusion.text.text_cleaner import TextCleaner
 from cleanfusion.text.text_vectorizer import TextVectorizer
@@ -65,6 +66,18 @@ def main():
     vectorize_parser.add_argument("--method", choices=["tfidf", "count", "bert"], default="tfidf",
                                 help="Vectorization method")
     
+    # Add a new subparser for encoding
+    encode_parser = subparsers.add_parser("encode", help="Encode categorical data in a CSV file")
+    encode_parser.add_argument("file", help="Path to the CSV file")
+    encode_parser.add_argument("--output", "-o", help="Output file path")
+    encode_parser.add_argument("--method", choices=["label", "onehot", "ordinal", "binary", "target"], 
+                            default="label", help="Encoding method")
+    encode_parser.add_argument("--columns", help="Comma-separated list of columns to encode")
+    encode_parser.add_argument("--target", help="Target column for target encoding")
+    encode_parser.add_argument("--keep-original", action="store_true", 
+                            help="Keep original columns after encoding")
+
+    
     # Parse arguments
     args = parser.parse_args()
     
@@ -82,6 +95,9 @@ def main():
         clean_text_file(args)
     elif args.command == "vectorize":
         vectorize_text_file(args)
+    elif args.command == "encode":
+        encode_categorical_data(args)
+
     else:
         parser.print_help()
         return 1
@@ -286,6 +302,53 @@ def vectorize_text_file(args):
         return 1
     
     return 0
+
+def encode_categorical_data(args):
+    """Encode categorical data in a CSV file."""
+    logger = Logger()
+    logger.info(f"Encoding categorical data in file: {args.file}")
+    
+    # Check if file exists
+    if not os.path.exists(args.file):
+        logger.error(f"File not found: {args.file}")
+        return 1
+    
+    try:
+        # Read the CSV file
+        handler = CSVHandler()
+        df = handler.read_file(args.file)
+        
+        # Parse columns to encode
+        columns = args.columns.split(',') if args.columns else None
+        
+        # Create encoder
+        from cleanfusion.text.categorical_encoder import CategoricalEncoder
+        encoder = CategoricalEncoder(method=args.method)
+        
+        # Encode the data
+        encoded_df = encoder.fit_transform(
+            df, 
+            columns=columns,
+            target_column=args.target,
+            drop_original=not args.keep_original
+        )
+        
+        # Save the encoded data
+        output_path = args.output if args.output else None
+        if not output_path:
+            base_name = os.path.basename(args.file)
+            base_name_no_ext = os.path.splitext(base_name)[0]
+            output_path = f"encoded_{base_name_no_ext}.csv"
+        
+        handler.write_file(encoded_df, output_path)
+        logger.info(f"Encoded data saved to: {output_path}")
+        
+    except Exception as e:
+        logger.error(f"Error encoding categorical data: {e}")
+        return 1
+    
+    return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())
