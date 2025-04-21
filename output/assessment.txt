@@ -1,46 +1,63 @@
 # Data Quality Assessment Report
 
 ## Dataset Overview
-- Number of rows: 100
-- Number of columns: 12
+- Number of rows: 400
+- Number of columns: 5
 
 ## Missing Values
-- Total missing cells: 0 (0.00%)
-- Columns with missing values: 0
+- Total missing cells: 19 (0.95%)
+- Columns with missing values: 2
 
 ### Top 5 Columns with Missing Values
-- Index: 0.0 values (0.00%)
-- Customer Id: 0.0 values (0.00%)
-- First Name: 0.0 values (0.00%)
-- Last Name: 0.0 values (0.00%)
-- Company: 0.0 values (0.00%)
+- EstimatedSalary: 11.0 values (2.75%)
+- Age: 8.0 values (2.00%)
+- User ID: 0.0 values (0.00%)
+- Gender: 0.0 values (0.00%)
+- Purchased: 0.0 values (0.00%)
 
 ## Duplicate Rows
 - Duplicate rows: 0 (0.00%)
 
 ## Data Types
 ### Column Data Types
-- Index: int64
-- Customer Id: object
-- First Name: object
-- Last Name: object
-- Company: object
-- City: object
-- Country: object
-- Phone 1: object
-- Phone 2: object
-- Email: object
-- Subscription Date: object
-- Website: object
+- User ID: int64
+- Gender: object
+- Age: float64
+- EstimatedSalary: float64
+- Purchased: int64
 
 ## Outliers
 
 ## Distributions
 
-### Index
+### User ID
 - Distribution type: unknown
-- Mean: 50.500
-- Median: 50.500
-- Standard deviation: 29.011
-- Skewness: 0.000
-- Range: 1.000 to 100.000
+- Mean: 15691539.758
+- Median: 15694341.500
+- Standard deviation: 71658.322
+- Skewness: -0.035
+- Range: 15566689.000 to 15815236.000
+
+### Age
+- Distribution type: likely_normal
+- Mean: 37.763
+- Median: 37.000
+- Standard deviation: 10.515
+- Skewness: 0.215
+- Range: 18.000 to 60.000
+
+### EstimatedSalary
+- Distribution type: likely_normal
+- Mean: 70082.262
+- Median: 70000.000
+- Standard deviation: 34324.008
+- Skewness: 0.485
+- Range: 15000.000 to 150000.000
+
+### Purchased
+- Distribution type: unknown
+- Mean: 0.357
+- Median: 0.000
+- Standard deviation: 0.480
+- Skewness: 0.597
+- Range: 0.000 to 1.000
