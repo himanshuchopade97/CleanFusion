@@ -6,7 +6,7 @@ CleanFusion is a powerful Python library designed to streamline and automate dat
 
 ## Authors
 
-- [Himanshu Chopade](https://github.com/himanshuchopade)
+- [Himanshu Chopade](https://github.com/himanshuchopade97)
 - [Hriday Thaker](https://github.com/thakerhriday)
 
 ## Features
