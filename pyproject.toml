@@ -9,7 +9,7 @@ description = "A comprehensive data cleaning library"
 readme = "README.md"
 authors = [
     {name = "Himanshu Chopade", email = "himanshuchopade97@gmail.com"},
-    {}
+    {name = "Hriday Thaker", email = "hriday.thaker2604@gmail.com"}
 ]
 license = {text = "MIT"}
 classifiers = [
