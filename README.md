@@ -282,3 +282,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - The scikit-learn team for their excellent machine learning library
 - The NLTK project for natural language processing tools
 - All contributors who have helped improve this library
+
+![PyPI - Downloads](https://img.shields.io/pypi/dm/cleanfusion?label=Downloads&color=brightgreen)
+

@@ -1,0 +1,9 @@
+Name,Age,Salary,JoiningDate,Comments
+Alice,25,50000,2020-01-15,Hardworking
+Bob,NaN,$60000,15/01/2020,Good performer
+Charlie,30,,2020-01-20,NaN
+David,,45000,,Lazy
+Eve,27,£52000,2020-01-25,Excellent
+Frank,abc,NaN,January 30 2020,123
+,35,NaN,2020/01/31,Outstanding
+Grace,NaN,1000000,2020-02-01,A bit too ambitious
