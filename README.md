@@ -284,4 +284,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - All contributors who have helped improve this library
 
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/cleanfusion?label=Downloads&color=brightgreen)
-
