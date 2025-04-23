@@ -50,9 +50,15 @@ pip install cleanfusion
 
 ### Command Line Interface
 
+
 CleanFusion provides a convenient command-line interface for common data cleaning tasks:
 
-```bash
+```
+cleanfusion  --help
+```
+Replace file names and column names as needed for your use case.
+```
+
 # Assess data quality
 cleanfusion assess data.csv --output assessment_report.txt
 
@@ -68,8 +74,27 @@ cleanfusion text document.txt --lowercase --remove-punctuation --remove-stopword
 # Vectorize text data
 cleanfusion vectorize document.txt --method tfidf --output vectors.csv
 
-# Encode categorical data
+# Encode categorical data (one-hot encoding for specific columns)
 cleanfusion encode data.csv --method onehot --columns Category,Region --output encoded_data.csv
+
+# Label encoding
+cleanfusion encode data.csv --method label --output encoded_data.csv
+
+# Target encoding (with a target variable)
+cleanfusion encode data.csv --method target --target TargetColumn --output target_encoded.csv
+
+# Clean a DOCX file
+cleanfusion clean document.docx --output cleaned_document.docx
+
+# Clean a PDF file
+cleanfusion clean document.pdf --output extracted_text.txt
+```
+
+**Tip:**  
+For details and all options for any command, run:
+
+```
+cleanfusion  <command> --help
 ```
 
 ### Python API

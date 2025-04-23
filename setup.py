@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="cleanfusion",
-    version="0.1.3",
+    version="0.1.5",
     author="Hriday Thaker, Himanshu Chopade", 
     author_email="hriday.thaker2604@gmail.com, himanshuchopade97@gmail.com",  
     description="A comprehensive data cleaning and preprocessing library for structured and unstructured data",
