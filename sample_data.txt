@@ -1,4 +1,3 @@
-
 Name:   Alice!   Email:  ALICE123@Example.Com    Age:  24
 
 name:Bob,, email:Bob_theBuilder@example.com AGE: Thirty
