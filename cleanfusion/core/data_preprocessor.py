@@ -126,7 +126,7 @@ class DataPreprocessor(BaseEstimator, TransformerMixin):
             if df[col].isnull().sum() > 0:
                 df[col] = self.missing_handler.handle_categorical_missing(df[col])
         
-        return df.round(2)
+        return df
     
     def _handle_outliers(self, df):
         """Handle outliers in the DataFrame."""
