@@ -4,12 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cleanfusion"
-version = "0.1.5"
+version = "0.1.6"
 description = "A comprehensive data cleaning library"
 readme = "README.md"
 authors = [
     {name = "Himanshu Chopade", email = "himanshuchopade97@gmail.com"},
-    {name = "Hriday Thaker", email = "hriday.thaker2604@gmail.com"}
+    {name = "Hriday Thaker", email = "hriday.thaker2604@gmail.com"},
+    {name = "Aryan Bachute", email = "bachutearyan@gmail.com"},
+    {name = "Gautam Rajhans", email = "gprajhans@gmail.com"}
 ]
 license = {text = "MIT"}
 classifiers = [
