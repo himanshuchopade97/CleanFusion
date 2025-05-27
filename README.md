@@ -6,10 +6,14 @@ CleanFusion is a powerful Python library designed to streamline and automate dat
 
 ## Authors
 
-- [Himanshu Chopade](https://github.com/himanshuchopade97)
-- [Hriday Thaker](https://github.com/thakerhriday)
-- [Aryan Bachute](https://github.com/Aryanfour5)
-- [Gautam Rajhans](https://github.com/capricode-ui)
+- [Himanshu Chopade, Department of Computer Science and Engineering, Symbiosis Institute of Technology, Pune](https://github.com/himanshuchopade97)
+- [Hriday Thaker, Department of Computer Science and Engineering, Symbiosis Institute of Technology, Pune](https://github.com/thakerhriday)
+- [Aryan Bachute, Department of Computer Science and Engineering, Symbiosis Institute of Technology, Pune](https://github.com/Aryanfour5)
+- [Gautam Rajhans, Department of Computer Science and Engineering, Symbiosis Institute of Technology, Pune](https://github.com/capricode-ui)
+
+## Mentor
+
+- Dr. Aditi Sharma (Mentor), Department of Computer Science and Engineering, Symbiosis Institute of Technology, Pune
 
 ## Features
 
